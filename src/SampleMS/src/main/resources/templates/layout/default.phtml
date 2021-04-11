@@ -1,0 +1,178 @@
+<?php
+$label;
+if (in_array($_ENV['APP_ENV'], ['Development', 'Homologation'])) {
+    $label = $_ENV['APP_ENV'];
+}
+$this->headLink()
+    ->prependStylesheet('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
+    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+$this->inlineScript()
+    ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    ->prependFile('https://code.jquery.com/jquery-3.3.1.min.js');
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="shortcut icon"
+    href="<?php echo  $this->serverUrl('/');?>img/icon.png" />
+    <?=$this->headTitle('')->setSeparator(' - ')->setAutoEscape(false)?>
+    <?=$this->headMeta()?>
+    <?=$this->headLink()?>
+    <style>
+body {
+    padding-top: 80px;
+}
+.bg-dark {
+    background-color: #585858!important;
+    }
+.app {
+    min-height: 100vh;
+}
+
+.app-footer {
+    padding-bottom: 1em;
+}
+
+.zf-green, h2 a {
+    color: #68b604;
+}
+
+.nav-item {
+    max-height: 60px;
+}
+
+img.logo {
+    max-height: 50px;
+}
+
+img.restful {
+    max-height: 35vh;
+}
+
+.navbar {
+    z-index: 90;
+}
+
+.ribbon-wrapper-green {
+    width: 185px;
+    height: 183px;
+    overflow: hidden;
+    position: absolute;
+    top: -3px;
+    left: -3px;
+}
+
+.ribbon-green {
+    z-index: 91;
+    font: bold 15px Sans-Serif;
+    color: #333;
+    text-align: center;
+    text-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    position: relative;
+    padding: 7px 0;
+    left: -45px;
+    top: 38px;
+    width: 190px;
+    background-color: #BFDC7A;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A),
+        to(#8EBF45));
+    background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45);
+    background-image: -moz-linear-gradient(top, #BFDC7A, #8EBF45);
+    background-image: -ms-linear-gradient(top, #BFDC7A, #8EBF45);
+    background-image: -o-linear-gradient(top, #BFDC7A, #8EBF45);
+    color: #6a6340;
+    -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+.ribbon-green:before, .ribbon-green:after {
+    content: "";
+    border-top: 3px solid #6e8900;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    position: absolute;
+    bottom: -3px;
+}
+
+.ribbon-green:before {
+    left: 0;
+}
+
+.ribbon-green:after {
+    right: 0;
+}
+</style>
+</head>
+<body class="app">
+    <header class="app-header">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top"
+            role="navigation">
+            <?php if (isset($label)) :?>
+            <div class="ribbon-wrapper-green">
+                <div class="ribbon-green"><?php echo  $label;?></div>
+            </div>
+            <?php endif; ?>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggler" data-toggle="collapse"
+                        data-target="#navbarCollapse" aria-controls="#navbarCollapse"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"> </span>
+                    </button>
+                    <!-- Brand -->
+
+                </div>
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item logo"><a
+                            href="<?php echo  $this->serverUrl('/');?>" class="nav-link"> <img
+                                class="logo"
+                                src="<?php echo  $this->serverUrl('/');?>img/logo-horizontal-site.png" />
+                        </a></li>
+                        <?php if (isset($label)) :?>
+                        <li class="nav-item"><a target="_blank"
+                            href="<?php echo  $this->serverUrl('/');?>swagger/"
+                            class="nav-link"> <i class="fa fa-hashtag"></i> Api Documentation
+                        </a></li>
+                        <li class="nav-item"><a target="_blank"
+                            href="<?php echo  $this->serverUrl('/');?>build/reports/coverage/"
+                            class="nav-link"> <i class="fa fa-hashtag"></i> Code Coverage
+                        </a></li>
+                        <?php endif; ?>
+                        <li class="nav-item"><a target="_blank"
+                            href="<?=$this->url('api.ping')?>" class="nav-link"> <i
+                                class="fa fa-check-square"></i> Check Server Response
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="app-content">
+        <main class="container">
+            <?=$this->content?>
+        </main>
+    </div>
+    <footer class="app-footer">
+        <div class="container">
+            <p></p>
+            <hr />
+            <p>
+                &copy; 2019 - <?=date('Y')?> by Incoders Tecnologia. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <?=$this->inlineScript()?>
+</body>
+</html>

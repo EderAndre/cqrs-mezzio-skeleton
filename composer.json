@@ -1,0 +1,105 @@
+{
+    "name" : "guarida/cqrs-es-microservice-boilerplate",
+    "description" : "cqrs-es-microservice-boilerplate skeleton.",
+    "type" : "project",
+    "homepage" : "https://github.com/guarida/cqrs-es-microservice-boilerplate",
+    "license" : "BSD-3-Clause",
+    "keywords" : [
+        "skeleton",
+        "spacebooking",
+        "mezzio",
+        "laminas"
+    ],
+    "config" : {
+        "sort-packages" : true
+    },
+    "extra" : {
+        "zf" : {
+            "component-whitelist" : [
+                "mezzio/mezzio",
+                "mezzio/mezzio-helpers",
+                "mezzio/mezzio-router",
+                "laminas/laminas-httphandlerrunner",
+                "mezzio/mezzio-fastroute",
+                "mezzio/mezzio-laminasviewrenderer"
+            ]
+        }
+    },
+    "support" : {
+        "source" : "https://github.com/guarida/cqrs-es-microservice-boilerplate"
+    },
+    "require" : {
+        "php" : "^7.3",
+        "illuminate/database" : "^6.0",
+        "illuminate/pagination" : "^6.0",
+        "robmorgan/phinx" : "^0.11.1",
+        "symfony/console" : "^4.3",
+        "laminas/laminas-component-installer" : "^2.1.1",
+        "laminas/laminas-config-aggregator" : "^1.0",
+        "laminas/laminas-diactoros" : "^1.7.1 || ^2.0",
+        "mezzio/mezzio" : "^3.0.1",
+        "mezzio/mezzio-helpers" : "^5.0",
+        "laminas/laminas-stdlib" : "^3.1",
+        "laminas/laminas-servicemanager" : "^3.3",
+        "mezzio/mezzio-fastroute" : "^3.0",
+        "mezzio/mezzio-laminasviewrenderer" : "^2.0",
+        "laminas/laminas-permissions-acl" : "*",
+        "mezzio/mezzio-authentication-basic" : "*",
+        "mezzio/mezzio-authentication" : "^1.0",
+        "mezzio/mezzio-authorization" : "^1.0",
+        "mezzio/mezzio-authorization-acl" : "^1.0",
+        "laminas/laminas-i18n" : "^2.7",
+        "zircote/swagger-php" : "^3.0",
+        "laminas/laminas-dependency-plugin" : "^1.0",
+        "vlucas/phpdotenv" : "*",
+        "google/cloud-storage" : "*"
+    },
+    "require-dev" : {
+        "phpunit/phpunit" : "^7.0.1",
+        "roave/security-advisories" : "dev-master",
+        "squizlabs/php_codesniffer" : "3.*",
+        "mezzio/mezzio-tooling" : "^1.0",
+        "laminas/laminas-development-mode" : "^3.1",
+        "filp/whoops" : "^2.1.12",
+        "laravel-foundation/testing" : "^5.7.1"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Com\\Incoders\\SampleMS\\" : "src/SampleMS/src/main/",
+            "Com\\Incoders\\Cqrs\\" : "src/Cqrs/src/"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
+            "Com\\Incoders\\SampleMSTest\\" : "src/SampleMS/src/test/"
+        }
+    },
+    "scripts" : {
+        "post-create-project-cmd" : "@development-enable",
+        "development-disable" : "laminas-development-mode disable",
+        "development-enable" : "laminas-development-mode enable",
+        "development-status" : "laminas-development-mode status",
+        "expressive" : "expressive --ansi",
+        "check" : [
+            "@cs-check",
+            "@test"
+        ],
+        "clear-config-cache" : "php bin/clear-config-cache.php",
+        "cs-check" : "phpcs --ignore=*/test/*,*/data/*",
+        "cs-fix" : "phpcbf",
+        "serve" : "php -S 0.0.0.0:3080 -t public/",
+        "test" : [
+            "Composer\\Config::disableProcessTimeout",
+            "phpunit --colors=always"
+        ],
+        "test-coverage" : [
+            "Composer\\Config::disableProcessTimeout",
+            "phpunit --colors=always --coverage-html '/var/www/html/public/build/reports/coverage' --coverage-clover clover.xml"
+        ],
+        "generate-swagger" : "./vendor/bin/openapi config/ -o ./public/swagger/swagger.json",
+        "migrate-dev" : "phinx migrate -e development",
+        "migrate-prod" : "phinx migrate -e production",
+        "rollback-dev" : "phinx rollback -e development",
+        "rollback-prod" : "phinx rollback -e production"
+    }
+}

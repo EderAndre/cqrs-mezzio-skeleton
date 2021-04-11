@@ -1,0 +1,377 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sample MS API",
+        "description": "All top-level API resources have support for bulk fetches via list API methods. For instance, you can\n    list charges, list customers, and list invoices. These list API methods share a common structure, taking these\n    follow parameters: equals, greaterThan, lessThan, greaterOrEqualThan, lessOrEqualThan, in, year, month, contains,\n    sort.<br><br>Our client libraries offer auto-pagination to easily traverse all pages of a list.<br><br>\n    <strong>Pagination</strong><br>You can paginate the list using page={number} to set a current page or use\n    size={number} to show number of registers by page",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/directory/list": {
+            "get": {
+                "tags": [
+                    "File Manipulation Example"
+                ],
+                "summary": "Get All registers in SpaceBooking Entity, identified by condid.equals",
+                "description": "Get All registers in SpaceBooking Entity, identified by condid.equals",
+                "parameters": [
+                    {
+                        "name": "preffix",
+                        "in": "query",
+                        "description": "preffix",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A object SpaceBooking with attributes"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/file/upload": {
+            "post": {
+                "tags": [
+                    "File Manipulation Example"
+                ],
+                "summary": "Upload file to bucket ",
+                "description": "Upload file ",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "type": "file",
+                                        "format": "byte"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "On Success return confirmation message"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/v2/sample/add/condid/{condid}/profile/{profile}/userid/{userid}": {
+            "post": {
+                "tags": [
+                    "Sample"
+                ],
+                "summary": "Add register in Sample Entity ",
+                "description": "Insert a register Sample Entity ",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "description": "User profile(role)",
+                        "required": true
+                    },
+                    {
+                        "name": "userid",
+                        "in": "path",
+                        "description": "User unique identifier(optional if API role)",
+                        "required": true
+                    },
+                    {
+                        "name": "condid",
+                        "in": "path",
+                        "description": "Condominium unique identifier",
+                        "required": true
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "name ",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "On Success return confirmation message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "id of new space added",
+                                            "type": "integer"
+                                        },
+                                        "condid": {
+                                            "description": "condominium unique id",
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "description": "Name (limit 100 char)",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "example": {
+                                        "Status": "success"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unautorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": "Authentication Failed"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": "Invalid APi Key"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKey": [],
+                        "ApiClient": [],
+                        "AppId": []
+                    },
+                    {
+                        "ApiKey": [],
+                        "ApiClient": [],
+                        "UserToken": []
+                    }
+                ]
+            }
+        },
+        "/api/v2/sample/get/condid/{condid}/profile/{profile}/userid/{userid}": {
+            "get": {
+                "tags": [
+                    "Sample"
+                ],
+                "summary": "Get One register in Sample Entity, identified by id.equals",
+                "description": "Get One register in Sample Entity, identified by id.equals",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "description": "User profile(role)",
+                        "required": true
+                    },
+                    {
+                        "name": "userid",
+                        "in": "path",
+                        "description": "User unique identifier(optional if API role)",
+                        "required": true
+                    },
+                    {
+                        "name": "condid",
+                        "in": "path",
+                        "description": "Condominium unique identifier",
+                        "required": true
+                    },
+                    {
+                        "name": "id.equals",
+                        "in": "query",
+                        "description": "SpaceBooking Id",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A object Sample with attributes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "id of new space added",
+                                            "type": "integer"
+                                        },
+                                        "condid": {
+                                            "description": "condominium unique id",
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "description": "Name of space(limit 100 char)",
+                                            "type": "string"
+                                        },
+                                        "createdAt": {
+                                            "description": "time creation",
+                                            "type": "time"
+                                        },
+                                        "cupdatedAt": {
+                                            "description": "time update",
+                                            "type": "time"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "example": {
+                                        "SpaceBokking": {
+                                            "id": "3",
+                                            "condid": "01234",
+                                            "name": "Sample 001",
+                                            "createdAt": "2019-01-01 00:00:00",
+                                            "updatedAt": "2019-01-02 00:00:00"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unautorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": "Authentication Failed"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": "Invalid APi Key"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKey": [],
+                        "ApiClient": [],
+                        "AppId": []
+                    },
+                    {
+                        "ApiKey": [],
+                        "ApiClient": [],
+                        "UserToken": []
+                    }
+                ]
+            }
+        },
+        "/api/u1/condid/{condid}/profile/{profile}/userid/{userid}": {
+            "get": {
+                "tags": [
+                    "ping"
+                ],
+                "summary": "get by ping sample",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "description": "user profile",
+                        "required": true
+                    },
+                    {
+                        "name": "userid",
+                        "in": "path",
+                        "description": "user userid(optional if API role)",
+                        "required": true
+                    },
+                    {
+                        "name": "condid",
+                        "in": "path",
+                        "description": "user condid",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An ping"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKey": [],
+                        "ApiClient": [],
+                        "AppId": []
+                    },
+                    {
+                        "ApiKey": [],
+                        "ApiClient": [],
+                        "UserToken": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "ApiKey": {
+                "type": "apiKey",
+                "name": "X-API-KEY",
+                "in": "header"
+            },
+            "ApiClient": {
+                "type": "apiKey",
+                "name": "X-API-CLIENT",
+                "in": "header"
+            },
+            "AppId": {
+                "type": "apiKey",
+                "name": "X-APP-ID",
+                "in": "header"
+            },
+            "UserToken": {
+                "type": "apiKey",
+                "name": "X-USER-TOKEN",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Sample",
+            "description": "Operations to Sample Entity"
+        },
+        {
+            "name": "ping",
+            "description": "Operationn Sample Health Server"
+        },
+        {
+            "name": "File Manipulation Example",
+            "description": "GCS Examples"
+        }
+    ]
+}

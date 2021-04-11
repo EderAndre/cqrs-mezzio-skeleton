@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  server:
+    build:
+      context: ../../
+      dockerfile: ./docker/test/Dockerfile.test
+    volumes:
+      - ../../:/var/www/html
+    container_name: samples
+    image: samples
+    ports:
+      - "80:3080"
+    working_dir: /var/www/html
+    command: 'composer serve'

@@ -1,0 +1,35 @@
+paths:
+    migrations: '%%PHINX_CONFIG_DIR%%/db/migrations'
+    seeds: '%%PHINX_CONFIG_DIR%%/db/seeds'
+
+environments:
+    default_migration_table: phinxlog
+    default_database: development
+    production:
+        adapter: mysql
+        host: mysql-serverFake.PROD
+        name: db_your_database_PROD
+        user: user_your_PROD
+        pass: 'F4k3_P4SSWD'
+        port: 3306
+        charset: utf8
+
+    development:
+        adapter: mysql
+        host: 'dm2.guarida.com.br'
+        name: db_your_dev_database
+        user: user_your_dev
+        pass: 'your_passwd_dev'
+        port: 3306
+        charset: utf8
+
+    homolog:
+        adapter: mysql
+        host: 'dm2.guarida.com.br'
+        name: db_your_homolog_database
+        user: user_your_homolog
+        pass: 'your_passwd_homolog'
+        port: 3306
+        charset: utf8
+
+version_order: creation

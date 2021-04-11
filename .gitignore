@@ -1,0 +1,15 @@
+.idea
+composer.phar
+clover.xml
+coveralls-upload.json
+vendor/
+.buildPath
+.project
+.settings/
+composer.lock
+public/build/reports/coverage/*
+!.gitkeep
+config/.env
+.vscode/
+./kubernetes
+./src/SpaceBooking/src/main/resources/credentials/guarida-imoveis-22df8c7325eb.json
